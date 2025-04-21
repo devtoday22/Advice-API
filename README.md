@@ -42,8 +42,8 @@ Then crop/optimize/edit your image however you like, add it to your project, and
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://github.com/devtoday22/Advice-API?tab=readme-ov-file#the-challenge)
-- Live Site URL: [Add live site URL here](https://advice-generator-umber-seven.vercel.app/)
+- Solution URL: https://github.com/devtoday22/Advice-API?tab=readme-ov-file#the-challenge
+- Live Site URL: https://advice-generator-umber-seven.vercel.app/
 
 ## My process
 
