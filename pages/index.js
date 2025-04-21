@@ -1,11 +1,35 @@
 import Head from "next/head";
-import Image from "next/image";
-import { Geist, Geist_Mono } from "next/font/google";
+import { useState, useEffect } from "react";
 import styles from "@/styles/Home.module.css";
-
-
+import Image from "next/image";
 
 export default function Home() {
+  const [advice, setAdvice] = useState({
+    id: 117,
+    text: "It is easy to sit up and take notice, what's difficult is getting up and taking action.",
+  });
+
+  const fetchAdvice = async () => {
+    try {
+      const response = await fetch("https://api.adviceslip.com/advice");
+      const data = await response.json();
+      setAdvice({
+        id: data.slip.id,
+        text: data.slip.advice,
+      });
+    } catch (error) {
+      console.error("Error fetching advice:", error);
+      setAdvice({
+        id: advice.id,
+        text: "Oops, something went wrong. Try again!",
+      });
+    }
+  };
+
+  useEffect(() => {
+    fetchAdvice(); // Fetch advice on initial load
+  }, []);
+
   return (
     <>
       <Head>
@@ -14,7 +38,30 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-     test
+      <div className={styles.main}>
+        <div className={styles.card}>
+          <h4 className={styles.adviceId}>
+            ADVICE #<span>{advice.id}</span>
+          </h4>
+          <p className={styles.adviceText}>"{advice.text}"</p>
+          <div className={styles.divider}>
+            <Image
+              src="/pattern-divider-desktop.svg"
+              width={444}
+              height={24}
+              alt="Divider"
+            />
+          </div>
+          <button className={styles.diceButton} onClick={fetchAdvice}>
+            <Image
+              src="/icon-dice.svg"
+              width={24}
+              height={24}
+              alt="Dice icon"
+            />
+          </button>
+        </div>
+      </div>
     </>
   );
 }
